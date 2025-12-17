@@ -1,11 +1,11 @@
 <?php
-require('./db_connect.php');
-include('incomes/show-incomes.php');
-include('expences/show-expences.php');
+require('../db/db_connect.php');
+include('../incomes/show-incomes.php');
+include('../expences/show-expences.php');
 
 session_start();
 if (!isset($_SESSION['user_id'])) {   
-      header("Location: login.php");    
+      header("Location: ../auth/login.php");    
       exit;
 }
 ?>
@@ -212,6 +212,6 @@ if (!isset($_SESSION['user_id'])) {
         Donut.push("<?php echo $row2['TotalExpences']?>")
         Donut.push("<?php echo $sum?>")
     </script>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

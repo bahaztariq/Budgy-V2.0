@@ -1,6 +1,6 @@
-CREATE DATABASE Smart_Wallet;
+CREATE DATABASE Smart_Wallet1;
 
-USE Smart_Wallet;
+USE Smart_Wallet1;
 
 CREATE TABLE incomes(
     id INT PRIMARY KEY AUTO_INCREMENT,

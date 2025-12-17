@@ -10,7 +10,7 @@
 
         $sql = "UPDATE expences SET montant = '$montant',date_ = '$date', description = '$description' WHERE id = $id";
         if(mysqli_query($connect,$sql)){
-            header("Location:../expences.php");
+            header("Location:../pages/expences.php");
         }else{
             echo mysqli_error($connect);
         }

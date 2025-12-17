@@ -1,7 +1,13 @@
 <?php
-require('./db_connect.php');
-include('incomes/show-incomes.php');
-include('expences/show-expences.php');
+require('../db/db_connect.php');
+include('../incomes/show-incomes.php');
+include('../expences/show-expences.php');
+
+session_start();
+if (!isset($_SESSION['user_id'])) {   
+      header("Location: ../auth/login.php");    
+      exit;
+}
 
 $income_data = null;
 if(isset($_GET['edit_id'])) {
@@ -170,6 +176,6 @@ if(isset($_GET['edit_id'])) {
             <input type="submit" value="Update Revenu" class="w-full bg-black text-white rounded-xl p-4 cursor-pointer">
         </form>
     </div>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

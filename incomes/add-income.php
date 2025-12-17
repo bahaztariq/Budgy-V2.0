@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
    $sql = "INSERT INTO incomes(montant,date_,description) VALUES ('$montant','$Date','$Description')";
 
    if(mysqli_query($connect,$sql)){
-    header("location:../incomes.php");
+    header("location:../pages/incomes.php");
    }else{
     echo mysqli_error($connect);
    }

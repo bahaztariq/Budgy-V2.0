@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
     <main class="w-full h-screen flex items-center">
         <div class="w-full h-screen flex flex-col justify-center items-center gap-4 px-4 ">
             <div class="w-full md:w-3/5 h-1/8 flex justify-start items-center" >
-                <a href="index.php" class="flex justify-center items-center gap-2 text-gray-500"> 
+                <a href="../pages/index.php" class="flex justify-center items-center gap-2 text-gray-500"> 
                     <i class="fi fi-ts-angle-left flex justify-center items-center" ></i>
                     <span>Back To Home </span>
                 </a>
