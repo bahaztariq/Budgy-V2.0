@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db_connect.php';
+require '../db/db_connect.php';
 
 $message = "";
 
@@ -17,10 +17,10 @@ if (isset($_POST['submit'])) {
         $user = $result->fetch_assoc();
 
         if (password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['UserID'];
+            $_SESSION['Temp_user_id'] = $user['UserID'];
             $_SESSION['username'] = $user['userName'];
             
-            header("Location: Dashboard.php");
+            header("Location: otp.php");
             exit();
         } else {
             $message = "Invalid password.";
@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
             </form>
         </div>
         
-        <img src="imgs/heroBanner.png" alt="" class="hero-banner w-1/2 h-screen hidden lg:block ">
+        <img src="../imgs/heroBanner.png" alt="" class="hero-banner w-1/2 h-screen hidden lg:block ">
     </main>
     
 </body>

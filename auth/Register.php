@@ -1,5 +1,5 @@
 <?php
-require 'db_connect.php';
+require '../db/db_connect.php';
 session_start();
 
 if(isset($_POST['submit'])){
@@ -17,9 +17,9 @@ if(isset($_POST['submit'])){
         $stmt->execute();
         $user = $stmt->insert_id;
         echo "Registration successful!";
-        $_SESSION['user_id'] = $user;
+        $_SESSION['Temp_user_id'] = $user;
         $_SESSION['username'] = $username;
-        header('location:Dashboard.php');
+        header('location:otp.php');
     } catch (mysqli_sql_exception $e) {
         if ($e->getCode() == 1062) {
             echo "That email is already registered.";
