@@ -1,0 +1,28 @@
+CREATE DATABASE Smart_Wallet;
+
+USE Smart_Wallet;
+
+CREATE TABLE incomes(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    montant FLOAT NOT NULL,
+    description varchar(1000) NOT NULL,
+    date_ DATE DEFAULT (CURRENT_TIME)
+);
+CREATE TABLE expences(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    montant FLOAT NOT NULL,
+    description varchar(1000) NOT NULL,
+    date_ DATE DEFAULT (CURRENT_TIME)
+);
+CREATE TABLE users(
+    UserID INT PRIMARY key AUTO_INCREMENT,
+    UserName varchar(50) NOT NULL,
+    Email varchar(100) UNIQUE,
+    password VARCHAR(100) NOT NULL
+);
+ALTER TABLE incomes ADD dateIn DATETIME DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE expences ADD dateIn DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+TRUNCATE incomes;
+TRUNCATE users;
+
