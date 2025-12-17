@@ -1,6 +1,6 @@
 <?php
 require '../db/db_connect.php';
-session_start();
+require '../sendemail.php';
 
 if(isset($_POST['submit'])){
     $username = $_POST['username'];
@@ -19,6 +19,7 @@ if(isset($_POST['submit'])){
         echo "Registration successful!";
         $_SESSION['Temp_user_id'] = $user;
         $_SESSION['username'] = $username;
+        generateOTP($connect,$email);
         header('location:otp.php');
     } catch (mysqli_sql_exception $e) {
         if ($e->getCode() == 1062) {

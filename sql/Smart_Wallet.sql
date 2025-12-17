@@ -1,28 +1,43 @@
-CREATE DATABASE Smart_Wallet1;
+CREATE DATABASE Smart_Wallet;
 
-USE Smart_Wallet1;
+USE Smart_Wallet;
 
 CREATE TABLE incomes(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    montant FLOAT NOT NULL,
+    UserID INT NOT NULL,
+    montant DECIMAL(5,2) NOT NULL,
     description varchar(1000) NOT NULL,
-    date_ DATE DEFAULT (CURRENT_TIME)
+    date_ DATE DEFAULT (CURRENT_TIME),
+    dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE expences(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    montant FLOAT NOT NULL,
+    UserID INT NOT NULL,
+    montant DECIMAL(5,2) NOT NULL,
     description varchar(1000) NOT NULL,
-    date_ DATE DEFAULT (CURRENT_TIME)
+    date_ DATE DEFAULT (CURRENT_TIME),
+    dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
+    
 );
 CREATE TABLE users(
     UserID INT PRIMARY key AUTO_INCREMENT,
     UserName varchar(50) NOT NULL,
     Email varchar(100) UNIQUE,
-    password VARCHAR(100) NOT NULL
+    password VARCHAR(100) NOT NULL,
+    ipAdresse VARCHAR(50) not NULL
 );
-ALTER TABLE incomes ADD dateIn DATETIME DEFAULT CURRENT_TIMESTAMP;
-ALTER TABLE expences ADD dateIn DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+CREATE TABLE OTP (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT NOT NULL,
+    otpCode VARCHAR(6) NOT NULL,       
+    Email VARCHAR(100) UNIQUE,
+    expiresAt DATETIME NOT NULL,       
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Foreign Key (UserID) REFERENCES users(UserID) on delete CASCADE
+);
 
 TRUNCATE incomes;
 TRUNCATE users;
+
 

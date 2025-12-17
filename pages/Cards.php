@@ -3,7 +3,7 @@ require('../db/db_connect.php');
 include('../incomes/show-incomes.php');
 include('../expences/show-expences.php');
 
-session_start();
+
 if (!isset($_SESSION['user_id'])) {   
       header("Location: ../auth/login.php");    
       exit;

@@ -3,7 +3,6 @@ require('../db/db_connect.php');
 include('../incomes/show-incomes.php');
 include('../expences/show-expences.php');
 
-session_start();
 if (!isset($_SESSION['user_id'])) {   
       header("Location: ../auth/login.php");    
       exit;
@@ -71,7 +70,7 @@ if (!isset($_SESSION['user_id'])) {
                     <i class="w-5 h-5 fa-solid fa-download"></i>
                     <span class="font-medium">download</span>
                 </a>
-                <a href="logout.php" class="self-end flex items-center gap-3 px-4 py-3  rounded-lg text-white">
+                <a href="../auth/logout.php" class="self-end flex items-center gap-3 px-4 py-3  rounded-lg text-white">
                      <i class="w-5 h-5 fa-solid fa-arrow-right-from-bracket"></i>
                     <span class="font-medium">Logout</span>
                 </a>
