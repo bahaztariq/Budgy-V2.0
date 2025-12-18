@@ -6,6 +6,10 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
+require 'vendor/autoload.php';
+
+$dotenv = DotenvVault\DotenvVault::createImmutable(__DIR__);
+$dotenv->safeLoad();
 
 function generateOTP($connect,$email){
   $userid =$_SESSION['Temp_user_id'];
@@ -25,12 +29,12 @@ try {
     //Server settings
     // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->Host       = $_ENV['stmp_host'];                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'Bahaztariq@gmail.com';                     //SMTP username
-    $mail->Password   = 'ewslmydbvyzoovei';                               //SMTP password
+    $mail->Username   = $_ENV['stmp_user'];                     //SMTP username
+    $mail->Password   = $_ENV['stmp_pass'];                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            // ENCRYPTION_SMTPS=465 Enable implicit TLS encryption
-    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Port       = $_ENV['stmp_port'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
     $mail->setFrom('Bahaztariq@gmail.com', 'Budgy Dashboard');

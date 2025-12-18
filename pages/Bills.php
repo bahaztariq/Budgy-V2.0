@@ -1,9 +1,7 @@
 <?php
 require('../db/db_connect.php');
-include('../incomes/show-incomes.php');
-include('../expences/show-expences.php');
 
-session_start();
+
 if (!isset($_SESSION['user_id'])) {   
       header("Location: ../auth/login.php");    
       exit;
@@ -26,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
     <aside class="h-screen flex flex-col absolute z-40 left-0 top-0 bottom-0 w-64 bg-black text-white transition-transform duration-300 ease-in-out md:relative md:tranblack-x-0 hidden lg:block">
             
             <div class="h-16 flex items-center px-4  border-black-700">
-                <img src="imgs/icon.png" alt="" class="w-12 h-12">
+                <img src="../imgs/icon.png" alt="" class="w-12 h-12">
                 <h1 class="text-xl font-bold tracking-wider">Budgy<span class="text-[#70E000]">BOARD</span></h1>
             </div>
 

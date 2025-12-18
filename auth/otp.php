@@ -38,16 +38,10 @@ if(isset($_POST["verifyBtn"])){
 
 if(isset($_POST["resendBtn"])){
             generateOTP($connect,$email);
-            // $otp = rand(100000,999999);
-            // $expires_at = date("Y-m-d H:i:s", strtotime("+1 minutes"));
-
-            // $otp_stmt = $connect->prepare("INSERT INTO otp (otpCode, user_id,expires_at) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE otpCode = VALUES(otpCode), expires_at = VALUES(expires_at) ");
-            // $otp_stmt->bind_param('iis',$otp,$user_id,$expires_at);
-            // $otp_stmt->execute();
 
             
             // $_SESSION['Temp_user_id'] = $user_id;
-            header("Location: otp.php");
+            // header("Location: otp.php");
     }
 
     }

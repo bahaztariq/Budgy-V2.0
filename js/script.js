@@ -54,7 +54,7 @@ if (ctx && typeof Donut !== 'undefined') {
             labels: ['Revenu', 'Expences', 'Balance'],
             datasets: [{
                 label: '# of Moneeey',
-                data: Donut,
+                data: Donut.length === 0  ? Donut : 0,
                 borderWidth: 1
             }]
         },

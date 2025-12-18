@@ -1,7 +1,5 @@
 <?php
 require('../db/db_connect.php');
-include('../incomes/show-incomes.php');
-include('../expences/show-expences.php');
 
 if (!isset($_SESSION['user_id'])) {   
       header("Location: ../auth/login.php");    
@@ -20,7 +18,7 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sekuya&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="icon" href="imgs/icon.png">
+    <link rel="icon" href="../imgs/icon.png">
 
     <style>
         /* Custom Scrollbar for cleaner look */
@@ -37,7 +35,7 @@ if (!isset($_SESSION['user_id'])) {
         <aside class="h-screen flex flex-col absolute z-40 left-0 top-0 bottom-0 w-64 bg-black text-white transition-transform duration-300 ease-in-out md:relative md:tranblack-x-0 hidden lg:block">
             
             <div class="h-16 flex items-center px-4  border-black-700">
-                <img src="imgs/icon.png" alt="" class="w-12 h-12">
+                <img src="../imgs/icon.png" alt="" class="w-12 h-12">
                 <h1 class="text-xl font-bold tracking-wider">Budgy<span class="text-[#70E000]">BOARD</span></h1>
             </div>
 
