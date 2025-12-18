@@ -5,6 +5,7 @@ if (!isset($_SESSION['user_id'])) {
       header("Location: ../auth/login.php");    
       exit;
 }
+$userid =$_SESSION['user_id'];
 
 $expence_data = null;
 if(isset($_GET['edit_id'])) {

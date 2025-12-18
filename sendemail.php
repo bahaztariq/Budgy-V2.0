@@ -6,8 +6,7 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-require 'vendor/autoload.php';
-
+require __DIR__ . '/vendor/autoload.php';
 $dotenv = DotenvVault\DotenvVault::createImmutable(__DIR__);
 $dotenv->safeLoad();
 
@@ -25,16 +24,18 @@ function generateOTP($connect,$email){
 function sendEmail($otp,$email){
 $mail = new PHPMailer(true);
 
+
+
 try {
     //Server settings
     // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
     $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = $_ENV['stmp_host'];                     //Set the SMTP server to send through
+    $mail->Host       = $_ENV['smtp_host'];                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = $_ENV['stmp_user'];                     //SMTP username
-    $mail->Password   = $_ENV['stmp_pass'];                               //SMTP password
+    $mail->Username   = $_ENV['smtp_user'];                     //SMTP username
+    $mail->Password   = $_ENV['smtp_pass'];                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            // ENCRYPTION_SMTPS=465 Enable implicit TLS encryption
-    $mail->Port       = $_ENV['stmp_port'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Port       = $_ENV['smtp_port'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
     $mail->setFrom('Bahaztariq@gmail.com', 'Budgy Dashboard');
