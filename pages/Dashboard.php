@@ -5,6 +5,8 @@ if (!isset($_SESSION['user_id'])) {
       header("Location: ../auth/login.php");    
       exit;
 }
+
+$userid = $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +114,7 @@ if (!isset($_SESSION['user_id'])) {
                             <div>
                             <p class="text-xs text-black-500 font-medium uppercase">Total Revenue</p>
                             <?php 
-                             $sql = "SELECT SUM(montant) AS TotalRevenu FROM incomes GROUP BY DATE_FORMAT(dateIn,'%Y-%m') ORDER BY DATE_FORMAT(dateIn,'%Y-%m') DESC LIMIT 1";
+                             $sql = "SELECT SUM(montant) AS TotalRevenu FROM incomes WHERE UserID = '$userid' GROUP BY DATE_FORMAT(dateIn,'%Y-%m') ORDER BY DATE_FORMAT(dateIn,'%Y-%m') DESC LIMIT 1";
                              $query = mysqli_query($connect, $sql); 
                              $row1 = mysqli_fetch_assoc($query);
                              $sum1 = $row1['TotalRevenu'] ?? 0; 
@@ -133,7 +135,7 @@ if (!isset($_SESSION['user_id'])) {
                             <div>
                                 <p class="text-xs text-black-500 font-medium uppercase">Total Expences</p>
                                 <?php 
-                                $sql = "SELECT SUM(montant) AS TotalExpences FROM expences GROUP BY DATE_FORMAT(dateIn,'%Y-%m') ORDER BY DATE_FORMAT(dateIn,'%Y-%m') DESC LIMIT 1";
+                                $sql = "SELECT SUM(montant) AS TotalExpences FROM expences WHERE UserID = '$userid' GROUP BY DATE_FORMAT(dateIn,'%Y-%m') ORDER BY DATE_FORMAT(dateIn,'%Y-%m') DESC LIMIT 1";
                                 $query = mysqli_query($connect, $sql); 
                                 $row2 = mysqli_fetch_assoc($query);
                                 $sum2 = $row2['TotalExpences'] ?? 0; 
@@ -169,17 +171,17 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
                     <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                         <h3 class="font-bold text-lg text-black-800 mb-4">Revenue Analytics</h3>
-                        <div class="h-64 w-full bg-black-50 rounded-lg flex items-center justify-center border border-dashed border-black-300 text-black-400">
+                        <div class="h-64 w-full bg-black-50 rounded-lg flex items-center justify-center  text-black-400">
                          <canvas id="LineChart"></canvas>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
                         <h3 class="font-bold text-lg text-black-800 mb-4">Traffic Source</h3>
-                        <div class="h-40 w-full bg-black-50 rounded-lg flex items-center justify-center border border-dashed border-black-300 text-black-400 mb-4">
+                        <div class="h-64 w-full bg-black-50 rounded-lg flex items-center justify-center  text-black-400 mb-4">
                             <canvas id="DonutChart"></canvas>
                         </div>
-                        <div class="space-y-3">
+                        <!-- <div class="space-y-3">
                             <div class="flex justify-between text-sm">
                                 <span class="text-black-500">Direct</span>
                                 <span class="font-bold">54%</span>
@@ -195,7 +197,7 @@ if (!isset($_SESSION['user_id'])) {
                             <div class="w-full bg-black-100 rounded-full h-2">
                                 <div class="bg-green-500 h-2 rounded-full" style="width: 32%"></div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -205,9 +207,9 @@ if (!isset($_SESSION['user_id'])) {
     </div>
     <script>
         let Donut = [];
-        Donut.push("<?php echo $row1['TotalRevenu']?>");
-        Donut.push("<?php echo $row2['TotalExpences']?>")
-        Donut.push("<?php echo $sum?>")
+        Donut.push("<?php echo $sum1?>");
+        Donut.push("<?php echo $sum2?>");
+        Donut.push("<?php echo $sum?>");
     </script>
     <script src="../js/script.js"></script>
 </body>

@@ -5,7 +5,7 @@ USE Smart_Wallet;
 CREATE TABLE incomes(
     id INT PRIMARY KEY AUTO_INCREMENT,
     UserID INT NOT NULL,
-    montant DECIMAL(5,2) NOT NULL,
+    montant DECIMAL(8,2) NOT NULL,
     description varchar(1000) NOT NULL,
     date_ DATE DEFAULT (CURRENT_TIME),
     dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -13,7 +13,7 @@ CREATE TABLE incomes(
 CREATE TABLE expences(
     id INT PRIMARY KEY AUTO_INCREMENT,
     UserID INT NOT NULL,
-    montant DECIMAL(5,2) NOT NULL,
+    montant DECIMAL(8,2) NOT NULL,
     description varchar(1000) NOT NULL,
     date_ DATE DEFAULT (CURRENT_TIME),
     dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -34,6 +34,19 @@ CREATE TABLE OTP (
     Email VARCHAR(100) UNIQUE,
     expiresAt DATETIME NOT NULL,       
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Foreign Key (UserID) REFERENCES users(UserID) on delete CASCADE
+);
+CREATE TABLE cards (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT NOT NULL,
+    cardNumber VARCHAR(20) NOT NULL,
+    expiryDate DATETIME NOT NULL,
+    cardCvv VARCHAR(4)  NOT NULL,  
+    cardType VARCHAR(20) NOT NULL,       
+    BankName VARCHAR(100) NOT NULL,
+    CardHolder VARCHAR(100) not NULL,
+    balance DECIMAL(10,2) NOT NULL,
+    isActive BOOLEAN DEFAULT false,
     Foreign Key (UserID) REFERENCES users(UserID) on delete CASCADE
 );
 

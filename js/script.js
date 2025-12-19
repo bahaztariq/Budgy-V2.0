@@ -4,6 +4,8 @@ const addRevenuBtn = document.querySelector('.Add-revenu-btn');
 const addRevenuForm = document.querySelector('.Add-revenu-form');
 const addExpencesBtn = document.querySelector('.Add-expences-btn');
 const addExpencesForm = document.querySelector('.Add-expences-form');
+const addCardBtn = document.querySelector('.Add-Card-btn');
+const addCardForm = document.querySelector('.Add-card-form');
 const modifyRevenuModal = document.querySelector('.Modify-revenu-form');
 const modifyexpencesModal = document.querySelector('.Modify-expences-form');
 
@@ -24,6 +26,11 @@ if (addRevenuBtn) {
 if (addExpencesBtn) {
     addExpencesBtn.addEventListener('click', () => {
         addExpencesForm.classList.remove('hidden');
+    })
+}
+if (addCardBtn) {
+    addCardBtn.addEventListener('click', () => {
+        addCardForm.classList.remove('hidden');
     })
 }
 
@@ -54,7 +61,7 @@ if (ctx && typeof Donut !== 'undefined') {
             labels: ['Revenu', 'Expences', 'Balance'],
             datasets: [{
                 label: '# of Moneeey',
-                data: Donut.length === 0  ? Donut : 0,
+                data: Donut,
                 borderWidth: 1
             }]
         },
@@ -78,16 +85,39 @@ if (dtx && typeof Donut !== 'undefined') {
                 label: 'My First Dataset',
                 data: Donut,
                 backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)'
+                    'rgba(249, 64, 104, 1)',
+                    'rgba(64, 98, 219, 1)',
+                    'rgba(224, 177, 66, 1)'
                 ],
                 hoverOffset: 4
             }]
         },
         options: {
             rotation: -90,
-            circumference: 180,
+            // circumference: 180,
         }
     });
 }
+
+
+document.getElementById('cardNumber').addEventListener('input', function(e) {
+    const input = e.target;
+    let value = input.value;
+    
+    let cursor = input.selectionStart;
+
+    value = value.replace(/[^0-9]/g, '');
+
+  
+    const formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
+
+    input.value = formattedValue;
+
+    if (cursor < formattedValue.length) {
+      
+      if (formattedValue[cursor - 1] === ' ' && input.value.length > input.selectionEnd) {
+        cursor++;
+      }
+      input.setSelectionRange(cursor, cursor);
+    }
+});

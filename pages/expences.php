@@ -134,7 +134,7 @@ if(isset($_GET['edit_id'])) {
                 <div class="h-10"></div>
     </main>
     <div class="modal Add-expences-form w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center hidden" >
-        <form action="expences/add-expences.php" method="POST" class=" relative w-full max-w-116 max-h-80 md:max-h-128 bg-white rounded-xl shadow-md px-4 py-8 flex flex-col items-center gap-4 overflow-y-auto ">
+        <form action="../expences/add-expences.php" method="POST" class=" relative w-full max-w-116 max-h-80 md:max-h-128 bg-white rounded-xl shadow-md px-4 py-8 flex flex-col items-center gap-4 overflow-y-auto ">
             <button class=" close-Modal-btn absolute top-2 right-4 text-3xl cursor-pointer">&times;</button>
             <h2 class="font-bold text-3xl text-black">Add Expences</h2>
             <div class="flex flex-col w-full gap-1">

@@ -2,11 +2,11 @@
 require('../db/db_connect.php');
 
 
-if (!isset($_SESSION['user_id'])) {   
-      header("Location: ../auth/login.php");    
-      exit;
-}
-?>
+// if (!isset($_SESSION['user_id'])) {   
+//       header("Location: ../auth/login.php");    
+//       exit;
+// }
+// ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +75,63 @@ if (!isset($_SESSION['user_id'])) {
                    </div>
                 </div>
     </main>
-    
+    <div class="modal Add-card-form w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center z-50 p-4 hidden" >
+        <div class=" relative w-full md:w-3/4 flex justify-center items-center gap-4 md:gap-16 bg-white rounded-xl flex-col md:flex-row p-4">
+            <button class="close-Modal-btn absolute top-2 right-4 text-3xl cursor-pointer z-50">&times;</button>
+            <div class="w-full md:w-1/2 h-full card-container flex justify-center items-center ">
+               <div class="bg-black/20 rounded-2xl w-96 h-54">
+                <p>number</p>
+               </div>
+            </div>
+
+            <form action="../Cards/add-card.php" method="POST" class=" relative w-full max-w-116   rounded-xl px-4 py-8 flex flex-col items-center gap-2 overflow-y-auto ">
+              
+                <h2 class="font-bold text-3xl text-black">Add Card</h2>
+                <div class="flex flex-col w-full gap-1">
+                    <label for="">Card Type:</label>
+                    <select name="cardType" id="" class="w-full  p-2 bg-gray-200 rounded border border-gray-300">
+                        <option value="Visa">Visa</option>
+                        <option value="Master Card">Master Card</option>
+                        <option value="union">union</option>
+                    </select>
+                </div>
+                <div class="flex flex-col w-full gap-1">
+                    <label for="">Bank:</label>
+                    <select name="bankname" id="" class="w-full  p-2 bg-gray-200 rounded border border-gray-300">
+                        <option value="Cih">Cih</option>
+                        <option value="BMCE">BMCE</option>
+                        <option value="Populaire">puplaire bank</option>
+                        <option value="wafaCash">wafacash</option>
+                        <option value="bankaLik">bankalik</option>
+                        <option value="western Union">western union</option>
+                    </select>
+                </div>
+                <div class="flex flex-col w-full gap-1">
+                  <label for="">Holder:</label>
+                  <input type="text" name="cardHolder" id="cardHolder"  placeholder="john doe" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
+                </div>
+                <div class="flex flex-col w-full gap-1">
+                  <label for="">Balance:</label>
+                  <input type="text" name="balance" id="cardHolder"  placeholder="john doe" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
+                </div>
+                <div class="flex flex-col w-full gap-1">
+                  <label for="">Card Number:</label>
+                  <input type="text" name="cardNumber" id="cardNumber" pattern ="[0-9]*" placeholder="XXXX XXXX XXXX XXXX" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
+                </div>
+                <div class="flex w-full gap-4">
+                 <div class="flex flex-col w-full gap-1">
+                   <label for="">expiry date:</label>
+                   <input type="text" name="expiryDate" pattern="[0-9]{2}/[0-9]{2}"  placeholder="01/01" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
+                 </div>
+                 <div class="flex flex-col w-full gap-1">
+                   <label for="">Cvv:</label>
+                   <input type="text"  maxlength='3' name="cardCvv" id="" placeholder="000" class=" p-2 bg-gray-200 rounded border border-gray-300" required></textarea>
+                  </div>
+                </div>
+             <input type="submit" value="Add Card" class=" w-full bg-black text-white rounded-xl p-4">
+            </form>
+        </div>
+    </div>
    <script src="../js/script.js"></script>
 </body>
 </html>

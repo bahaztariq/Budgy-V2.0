@@ -3,6 +3,11 @@
 require '../db/db_connect.php';
 require '../sendemail.php';
 
+if (isset($_SESSION['user_id'])) {   
+      header("Location: ../pages/Dashboard.php?message='You are loged in'");    
+      exit;
+}
+
 $message = "";
 
 if (isset($_POST['submit'])) {
