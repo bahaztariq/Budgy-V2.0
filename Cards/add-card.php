@@ -17,9 +17,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $expiryDate =$_POST['expiryDate'];
     $cardCvv =$_POST['cardCvv'];
 
-    $sql = "INSERT INTO cards() values(?,?,?,?,?,?,?) ";
+    $sql = "INSERT INTO cards(UserID ,
+                              cardNumber ,
+                              expiryDate,
+                              cardCvv ,  
+                              cardType ,       
+                              BankName ,
+                              CardHolder,
+                              balance) values(?,?,?,?,?,?,?,?) ";
     $stmt =$connect->prepare($sql);
-    $stmt-> bindparam("ssisssi",);
+    $stmt-> bindparam("ississsi",$userid,$cardNum,$expiryDate,$cardCvv,$cardType,$bankname,$cardHolder,$balance);
     $stmt->execute();
 }
 

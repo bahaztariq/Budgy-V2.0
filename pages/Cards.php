@@ -116,7 +116,7 @@ require('../db/db_connect.php');
                 </div>
                 <div class="flex flex-col w-full gap-1">
                   <label for="">Card Number:</label>
-                  <input type="text" name="cardNumber" id="cardNumber" pattern ="[0-9]*" placeholder="XXXX XXXX XXXX XXXX" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
+                  <input type="text" name="cardNumber" id="cardNumber" pattern ="[0-9\s]*" placeholder="XXXX XXXX XXXX XXXX" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
                 </div>
                 <div class="flex w-full gap-4">
                  <div class="flex flex-col w-full gap-1">
@@ -125,7 +125,7 @@ require('../db/db_connect.php');
                  </div>
                  <div class="flex flex-col w-full gap-1">
                    <label for="">Cvv:</label>
-                   <input type="text"  maxlength='3' name="cardCvv" id="" placeholder="000" class=" p-2 bg-gray-200 rounded border border-gray-300" required></textarea>
+                   <input type="text"  maxlength='3' name="cardCvv" id="" placeholder="000" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
                   </div>
                 </div>
              <input type="submit" value="Add Card" class=" w-full bg-black text-white rounded-xl p-4">

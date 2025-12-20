@@ -101,23 +101,6 @@ if (dtx && typeof Donut !== 'undefined') {
 
 
 document.getElementById('cardNumber').addEventListener('input', function(e) {
-    const input = e.target;
-    let value = input.value;
-    
-    let cursor = input.selectionStart;
-
-    value = value.replace(/[^0-9]/g, '');
-
-  
-    const formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
-
-    input.value = formattedValue;
-
-    if (cursor < formattedValue.length) {
-      
-      if (formattedValue[cursor - 1] === ' ' && input.value.length > input.selectionEnd) {
-        cursor++;
-      }
-      input.setSelectionRange(cursor, cursor);
-    }
+    let raw = e.target.value.replace(/\D/g, "").slice(0, 16);
+    e.target.value = raw.replace(/(.{4})/g, "$1 ").trim();
 });
