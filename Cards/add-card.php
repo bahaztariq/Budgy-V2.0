@@ -1,5 +1,6 @@
 <?php
-require '../db/db_connect';
+require '../db/db_connect.php';
+
 
 if (!isset($_SESSION['user_id'])) {   
       header("Location: ../auth/login.php");    
@@ -26,8 +27,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                               CardHolder,
                               balance) values(?,?,?,?,?,?,?,?) ";
     $stmt =$connect->prepare($sql);
-    $stmt-> bindparam("ississsi",$userid,$cardNum,$expiryDate,$cardCvv,$cardType,$bankname,$cardHolder,$balance);
+    $stmt-> bind_param("ississsi",$userid,$cardNum,$expiryDate,$cardCvv,$cardType,$bankname,$cardHolder,$balance);
     $stmt->execute();
+    header("location:../pages/Cards.php");
 }
 
 ?>

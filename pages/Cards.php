@@ -1,5 +1,5 @@
 <?php
-require('../db/db_connect.php');
+require('../Cards/show-cards.php');
 
 
 // if (!isset($_SESSION['user_id'])) {   
@@ -74,6 +74,96 @@ require('../db/db_connect.php');
                     <button class="Add-Card-btn bg-black py-2 px-4 rounded-2xl text-white cursor-pointer">+ Add New Card</button>
                    </div>
                 </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mb-8">
+    <?php
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            
+            $expiryDate = ($row['expiryDate'] != '0000-00-00 00:00:00') 
+                ? date("m/y", strtotime($row['expiryDate'])) : "**/**"; 
+            
+            $displayNumber = $row['cardNumber'];
+            $isActive = $row['isActive'];
+            $opacityClass = ($isActive == 0) ? 'opacity-60 grayscale' : '';
+    ?>
+            
+            <div class="flex flex-col items-center shadow-md bg-gray-300 p-4 rounded-xl">
+                
+                <div id="card-container-<?php echo $row['id'];?>" class=" relative w-96 h-56 bg-[#70E000] rounded-2xl shadow-2xl overflow-hidden text-white font-mono transition-all duration-300 hover:scale-105 <?php echo $opacityClass; ?>"> 
+                    <div class="relative w-full h-full p-6 flex flex-col justify-between z-10">
+                        <div class="flex justify-between items-start">
+                            <div class="text-sm font-bold tracking-widest uppercase text-black">
+                                <?php echo htmlspecialchars($row['BankName']); ?>
+                            </div>
+                            <div class="text-xl font-bold italic text-black">
+                                <?php echo strtoupper($row['cardType']); ?>
+                            </div>
+                        </div>
+
+                        <div class="w-12 h-9 bg-gradient-to-br from-yellow-200 to-yellow-500 rounded-md border border-yellow-600 shadow-inner flex items-center justify-center relative overflow-hidden">
+                            <div class="w-full h-[1px] bg-yellow-700 absolute top-1/3"></div>
+                            <div class="w-full h-[1px] bg-yellow-700 absolute bottom-1/3"></div>
+                            <div class="h-full w-[1px] bg-yellow-700 absolute left-1/3"></div>
+                            <div class="h-full w-[1px] bg-yellow-700 absolute right-1/3"></div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h3 class="text-2xl font-bold tracking-widest drop-shadow-md text-black">
+                                <?php echo htmlspecialchars($displayNumber); ?>
+                            </h3>
+                        </div>
+
+                        <div class="flex justify-between items-end mt-2">
+                            <div class="flex flex-col space-y-1">
+                                <div class="flex items-center space-x-4">
+                                    <div>
+                                        <p class="text-[10px] text-gray-700 uppercase">Card Holder</p>
+                                        <p class="font-bold tracking-wide uppercase text-sm text-black">
+                                            <?php echo htmlspecialchars($row['CardHolder']); ?>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] text-gray-700 uppercase">Expires</p>
+                                        <p class="font-bold tracking-wide text-sm text-black">
+                                            <?php echo $expiryDate; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-96 mt-4 px-4  flex justify-between items-center">
+                    
+                    <div>
+                        <p class="text-xs text-slate-500 uppercase font-semibold">Current Balance</p>
+                        <p class="text-xl font-bold text-slate-800 ">
+                            $<?php echo number_format($row['balance'], 2); ?>
+                        </p>
+                    </div>
+
+                    <div class="flex items-center">
+                        <label class="inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" <?php echo ($isActive == 1) ? 'checked' : ''; ?> onchange="toggleStatus(<?php echo $row['id']; ?>, this)">
+                            
+                            <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                            
+                            <span class="ms-3 text-sm font-medium text-gray-900 " id="status-text-<?php echo $row['id'];?>" >
+                                <?php echo ($isActive == 1) ? 'Active' : 'inActive'; ?>
+                            </span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+    <?php 
+        } 
+    } else {
+        echo '<div class="text-slate-500 col-span-3 text-center p-10">No cards found.</div>';
+    }
+    ?>
+</div>
     </main>
     <div class="modal Add-card-form w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center z-50 p-4 hidden" >
         <div class=" relative w-full md:w-3/4 flex justify-center items-center gap-4 md:gap-16 bg-white rounded-xl flex-col md:flex-row p-4">

@@ -1,5 +1,5 @@
 <?php
-require '../db/db_connect';
+require '../db/db_connect.php';
 
 if (!isset($_SESSION['user_id'])) {   
       header("Location: ../auth/login.php");    
@@ -8,11 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $userid = $_SESSION['user_id'];
 
-$sql = "SELECT * FROM cards Where Userid = '$userid' ";
-$stmt = $connect->prepare($sql);
-$stmt->bindresult();
+$stmt = $connect->prepare("SELECT * FROM cards WHERE Userid = ?");
+$stmt->bind_param("i", $userid); 
 $stmt->execute();
-$cards = $stmt->get_result();
-
-
-print_r($cards);
+$result = $stmt->get_result();

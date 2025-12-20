@@ -1,5 +1,5 @@
 <?php
-require('../db/db_connect.php');
+require('../Cards/show-cards.php');
 
 
 if (!isset($_SESSION['user_id'])) {   
@@ -75,6 +75,57 @@ if (!isset($_SESSION['user_id'])) {
                    </div>
                 </div>
     </main>
+    <div class="modal Add-Transaction w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center z-50 p-4" >
+            
+            <form action="../Cards/send-money.php" method="POST" class=" relative w-full max-w-116 bg-white   rounded-xl px-4 py-8 flex flex-col items-center gap-2 overflow-y-auto ">
+                <button class="close-Modal-btn absolute top-2 right-4 text-3xl cursor-pointer z-50">&times;</button>
+                <h2 class="font-bold text-3xl text-black">Make Transaction</h2>
+                <div class="flex flex-col w-full gap-1">
+                       <label for="cardSelect">Choose card:</label>
+                            <select name="Card" id="cardSelect" class="w-full p-2 bg-gray-200 rounded border border-gray-300">
+                                <option value="0" data-balance ="0">--No Card Choosen --</option>
+                                    <?php
+                                     while ($row = $result->fetch_assoc()) {
+                                         $balanceDisplay = number_format($row['balance'], 2);
+                                    ?>
+                                        <option 
+                                             value="<?php echo htmlspecialchars($row['cardNumber']); ?>" 
+                                             data-balance="<?php echo htmlspecialchars($row['balance']); ?>"> 
+                                            <?php echo htmlspecialchars($row['cardNumber']) . " (Balance: $" . $balanceDisplay . ")"; ?> 
+                                        </option>
+                                    <?php
+                                    }
+                                    ?>
+                            </select>
+                </div>
+
+                <div class="flex flex-col w-full gap-1">
+                    <label for="amountInput">Amount:</label>
+                    <input 
+                        type="number" 
+                        step="1.00" 
+                        name="amount" 
+                        id="amountInput" 
+                        placeholder="0.00" 
+                        class="p-2 bg-gray-200 rounded border border-gray-300" 
+                        required>
+                    <span id="balanceMsg" class="text-xs text-gray-500"></span>
+                </div>
+
+                <div class="flex flex-col w-full gap-1">
+                  <label for="">receiptant:</label>
+                  <input type="text" name="balance" id="cardHolder"  placeholder="Enter recieption Email" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
+                </div>
+                <div class="flex flex-col w-full gap-1">
+                  <label for="">Reciept Card :</label>
+                  <select name="" id="" class="w-full p-2 bg-gray-200 rounded border border-gray-300">
+                    <option value="">choose receptant card</option>
+                  </select>
+                </div>
+             <input type="submit" value="Send Money" class=" w-full bg-black text-white rounded-xl p-4">
+            </form>
+        
+    </div>
     
    <script src="../js/script.js"></script>
 </body>

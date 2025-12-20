@@ -104,3 +104,45 @@ document.getElementById('cardNumber').addEventListener('input', function(e) {
     let raw = e.target.value.replace(/\D/g, "").slice(0, 16);
     e.target.value = raw.replace(/(.{4})/g, "$1 ").trim();
 });
+
+const cardSelect = document.getElementById('cardSelect');
+const amountInput = document.getElementById('amountInput');
+const balanceMsg = document.getElementById('balanceMsg');
+
+function updateMaxBalance() {
+    const selectedOption = cardSelect.options[cardSelect.selectedIndex];
+    const balance = selectedOption.getAttribute('data-balance');
+    amountInput.max = balance;
+    balanceMsg.innerText = `Max transferable: $${balance}`;
+}
+if(cardSelect.options.length > 0) {
+            updateMaxBalance();
+}
+cardSelect.addEventListener('change', updateMaxBalance);
+
+function toggleStatus(id, checkbox) {
+    const isActive = checkbox.checked ? 1 : 0;
+    fetch('../Cards/update_status.php', {
+        method: 'POST',
+        body: new URLSearchParams({ 
+            'id': id, 
+            'isActive': isActive 
+        })
+    }).then(res => res.json())
+      .then(data => { 
+        if(!data.success)
+            alert('Update failed')
+         });
+    
+
+    const textSpan = document.getElementById('status-text-' + id);
+    const container = document.getElementById('card-container-' + id);
+
+    if (isActive) {
+        textSpan.innerText = 'Active';
+        container.classList.remove('opacity-60', 'grayscale');
+    } else {
+        textSpan.innerText = 'inActive';
+        container.classList.add('opacity-60', 'grayscale');
+    }
+}
