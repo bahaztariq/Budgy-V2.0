@@ -76,3 +76,12 @@ TRUNCATE expences;
 TRUNCATE users;
 
 
+CREATE Table transactions(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT NOT NULL,
+    cardNumber VARCHAR(20) NOT NULL,
+    montant DECIMAL(10,2) NOT NULL,
+    recipientcard VARCHAR(20) NOT NULL,
+    dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+    

@@ -2,10 +2,17 @@
 require('../Cards/show-cards.php');
 
 
+
+
 if (!isset($_SESSION['user_id'])) {   
       header("Location: ../auth/login.php");    
       exit;
 }
+$userid = $_SESSION['user_id'];
+
+$sql = "SELECT * FROM transactions where UserID = '$userid' ";
+$result2 = mysqli_query($connect, $sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,9 +52,9 @@ if (!isset($_SESSION['user_id'])) {
                     <i class="w-5 h-5 fa-regular fa-credit-card"></i>
                     <span class="font-medium">Cards</span>
                 </a>
-                <a href="Bills.php" class="flex items-center gap-3 px-4 py-3 bg-[#70E000] text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
+                <a href="Transactions.php" class="flex items-center gap-3 px-4 py-3 bg-[#70E000] text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
                     <i class="w-5 h-5 fa-solid fa-receipt"></i>
-                    <span class="font-medium"> bills</span>
+                    <span class="font-medium"> Transactions</span>
                 </a>
                 <a href="#" class="flex items-center gap-3 px-4 py-3 text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
                     <i class="w-5 h-5 ph ph-gear text-xl"></i>
@@ -71,12 +78,42 @@ if (!isset($_SESSION['user_id'])) {
                     <p class="text-sm text-black-500">Welcome back, here's what's happening today.</p>
                     </div>
                     <div>
-                    <button class="Add-Bill-btn bg-black py-2 px-4 rounded-2xl text-white cursor-pointer">+ Add New bill</button>
+                    <button class="Add-Transaction-btn bg-black py-2 px-4 rounded-2xl text-white cursor-pointer">+ New Transaction</button>
                    </div>
                 </div>
-                <div></div>
+                <div>
+                    <table class="w-full text-left text-sm text-black-600">
+                            <thead class="bg-black-50 text-xs uppercase font-semibold text-black-500">
+                                <tr>
+                                    <th class="px-6 py-4">Transaction ID</th>
+                                    <th class="px-6 py-4">Amount</th>
+                                    <th class="px-6 py-4">card Number</th>
+                                    <th class="px-6 py-4">receiptant Card</th>
+                                    <th class="px-6 py-4">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-black-100">
+                                <?php
+                                while($row = mysqli_fetch_assoc($result2)){
+                                  echo "<tr class='hover:bg-black-50 transition'>
+                                   <td class='px-6 py-4 font-medium text-black-800'>#{$row['id']}</td>
+                                   <td class='px-6 py-4'>
+                                     <div class='flex items-center gap-3'>
+                                     <span>{$row['montant']}</span>DH
+                                        
+                                     </div>
+                                   </td>
+                                   <td class='px-6 py-4'><span>{$row['cardNumber']}</span></td>
+                                   <td class='px-6 py-4'><span>{$row['recipientcard']}</span></td>
+                                    <td class='px-6 py-4'><span>{$row['dateIn']}</span></td>
+                                 </tr>";
+                                }
+                                 ?>
+                            </tbody>
+                        </table>
+                </div>
     </main>
-    <div class="modal Add-Transaction w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center z-50 p-4" >
+    <div class="modal Add-Transaction-form w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center z-50 p-4 hidden" >
             
             <form action="../Cards/send-money.php" method="POST" class=" relative w-full max-w-116 bg-white   rounded-xl px-4 py-8 flex flex-col items-center gap-2 overflow-y-auto ">
                 <button class="close-Modal-btn absolute top-2 right-4 text-3xl cursor-pointer z-50">&times;</button>

@@ -1,7 +1,12 @@
 <?php
 require '../db/db_connect.php'; 
 
-header('Content-Type: application/json'); 
+if (!isset($_SESSION['user_id'])) {   
+      header("Location: ../auth/login.php");    
+      exit;
+}
+
+$userid = $_SESSION['user_id'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
@@ -22,9 +27,13 @@ $sql3 ="UPDATE cards SET balance = balance - $amount WHERE cardNumber = '$cardNu
 $add = mysqli_query($connect, $sql2);
 $minus  = mysqli_query($connect, $sql3);
 
+$sql4 ="INSERT INTO transactions(UserID,montant, cardNumber, recipientCard) VALUES ('$userid', '$amount, '$cardNumber', '$recipientCard')";
+$trx = mysqli_query($connect, $sql4);
+
+
 if ($minus && $add) {
     echo json_encode(['success' => true]);
-    header('Location: ../pages/Bills.php');
+    header('Location: ../pages/Transactions.php');
 } else {
     echo json_encode(['success' => false, 'error' => 'Transfer Failed']);
 }

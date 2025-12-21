@@ -45,9 +45,9 @@ require('../Cards/show-cards.php');
                     <i class="w-5 h-5 fa-regular fa-credit-card"></i>
                     <span class="font-medium">Cards</span>
                 </a>
-                <a href="Bills.php" class="flex items-center gap-3 px-4 py-3 text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
+                <a href="Transactions.php" class="flex items-center gap-3 px-4 py-3  text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
                     <i class="w-5 h-5 fa-solid fa-receipt"></i>
-                    <span class="font-medium"> bills</span>
+                    <span class="font-medium"> Transactions</span>
                 </a>
                 <a href="#" class="flex items-center gap-3 px-4 py-3 text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
                     <i class="w-5 h-5 ph ph-gear text-xl"></i>

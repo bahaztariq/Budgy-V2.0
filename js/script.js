@@ -8,6 +8,9 @@ const addCardBtn = document.querySelector('.Add-Card-btn');
 const addCardForm = document.querySelector('.Add-card-form');
 const modifyRevenuModal = document.querySelector('.Modify-revenu-form');
 const modifyexpencesModal = document.querySelector('.Modify-expences-form');
+const addTransactionBtn = document.querySelector('.Add-Transaction-btn');
+const addTransactionForm = document.querySelector('.Add-Transaction-form');
+
 
 modals.forEach((mdl) => {
     mdl.addEventListener('click', (e) => {
@@ -31,6 +34,11 @@ if (addExpencesBtn) {
 if (addCardBtn) {
     addCardBtn.addEventListener('click', () => {
         addCardForm.classList.remove('hidden');
+    })
+}
+if(addTransactionBtn){
+    addTransactionBtn.addEventListener('click', () => {
+        addTransactionForm.classList.remove('hidden');
     })
 }
 
