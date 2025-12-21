@@ -6,8 +6,17 @@ if (!isset($_SESSION['user_id'])) {
       header("Location: ../auth/login.php");    
       exit;
 }
+$userid = $_SESSION['user_id'];
+
+
 $sql = "select * from category_limits";
 $categorie = mysqli_query($connect, $sql);
+
+
+$sql2 = "select * from Recurring_transactions where UserID = '$userid' ";
+$result2 = mysqli_query($connect, $sql2);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,6 +80,41 @@ $categorie = mysqli_query($connect, $sql);
                     <div>
                     <button class="Add-Reccuring-btn bg-black py-2 px-4 rounded-2xl text-white cursor-pointer">+ Schedule Transaction</button>
                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-4  flex justify-between items-center bg-[#70E000]">
+                        <h3 class="font-bold text-lg text-black-800">Transactions</h3>
+                       
+                    </div>
+                    <table class="w-full text-left text-sm text-black-600">
+                            <thead class="bg-black-50 text-xs uppercase font-semibold text-black-500 bg-[#70E000] ">
+                                <tr>
+                                    <th class="px-6 py-4">Transaction ID</th>
+                                    <th class="px-6 py-4">Amount</th>
+                                    <th class="px-6 py-4">card Number</th>
+                                    <th class="px-6 py-4">Category</th>
+                                    <th class="px-6 py-4">repetition</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-black-100">
+                                <?php
+                                while($row = mysqli_fetch_assoc($result2)){
+                                  echo "<tr class='hover:bg-black-50 transition odd:bg-gray-300'>
+                                   <td class='px-6 py-4 font-medium text-black-800'>#{$row['id']}</td>
+                                   <td class='px-6 py-4'>
+                                     <div class='flex items-center gap-3'>
+                                     <span>{$row['montant']}</span>DH
+                                        
+                                     </div>
+                                   </td>
+                                   <td class='px-6 py-4'><span>{$row['cardNumber']}</span></td>
+                                   <td class='px-6 py-4'><span>{$row['category']}</span></td>
+                                    <td class='px-6 py-4'><span>{$row['repititon']}</span></td>
+                                 </tr>";
+                                }
+                                 ?>
+                            </tbody>
+                        </table>
                 </div>
     </main>
     <div class="modal Add-Reccuring-form w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center z-50 p-4 " >
