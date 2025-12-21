@@ -18,6 +18,12 @@ if(isset($_GET['edit_id'])) {
         $income_data = mysqli_fetch_assoc($result);
     }
 }
+$userid = $_SESSION['user_id'];
+
+$stmt = $connect->prepare("SELECT * FROM cards WHERE Userid = ?");
+$stmt->bind_param("i", $userid); 
+$stmt->execute();
+$cards = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -139,6 +145,24 @@ if(isset($_GET['edit_id'])) {
             <button class="close-Modal-btn absolute top-2 right-4 text-3xl cursor-pointer">&times;</button>
             <h2 class="font-bold text-3xl text-black">Add Revenu</h2>
             <div class="flex flex-col w-full gap-1">
+                       <label for="cardSelect">Choose card:</label>
+                            <select name="Card" id="cardSelect" class="w-full p-2 bg-gray-200 rounded border border-gray-300">
+                                <option value="0" data-balance ="0">--No Card Choosen --</option>
+                                    <?php
+                                     while ($row = $cards->fetch_assoc()) {
+                                         $balanceDisplay = number_format($row['balance'], 2);
+                                    ?>
+                                        <option 
+                                             value="<?php echo htmlspecialchars($row['cardNumber']); ?>" 
+                                             data-balance="<?php echo htmlspecialchars($row['balance']); ?>"> 
+                                            <?php echo htmlspecialchars($row['cardNumber']) . " (Balance: $" . $balanceDisplay . ")"; ?> 
+                                        </option>
+                                    <?php
+                                    }
+                                    ?>
+                            </select>
+            </div>
+            <div class="flex flex-col w-full gap-1">
                 <label for="">Montant:</label>
                 <input type="text" name="montant" pattern ="[0-9]*" placeholder="Enter the amount of Revenu" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
             </div>
@@ -150,6 +174,7 @@ if(isset($_GET['edit_id'])) {
                 <label for="">Description:</label>
                 <textarea name="description" id="" placeholder="Enter the Description of Revenu" class=" min-h-30 p-2 bg-gray-200 rounded border border-gray-300" required></textarea>
             </div>
+
             <input type="submit" value="Add Revenu" class=" w-full bg-black text-white rounded-xl p-4">
         </form>
     </div>

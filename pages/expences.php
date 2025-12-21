@@ -17,6 +17,10 @@ if(isset($_GET['edit_id'])) {
         $expence_data = mysqli_fetch_assoc($result);
     }
 }
+$stmt = $connect->prepare("SELECT * FROM cards WHERE Userid = ?");
+$stmt->bind_param("i", $userid); 
+$stmt->execute();
+$cards = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -137,6 +141,30 @@ if(isset($_GET['edit_id'])) {
         <form action="../expences/add-expences.php" method="POST" class=" relative w-full max-w-116 max-h-80 md:max-h-128 bg-white rounded-xl shadow-md px-4 py-8 flex flex-col items-center gap-4 overflow-y-auto ">
             <button class=" close-Modal-btn absolute top-2 right-4 text-3xl cursor-pointer">&times;</button>
             <h2 class="font-bold text-3xl text-black">Add Expences</h2>
+            <div class="flex flex-col w-full gap-1">
+                       <label for="cardSelect">Choose card:</label>
+                            <select name="Card" id="cardSelect" class="w-full p-2 bg-gray-200 rounded border border-gray-300">
+                                <option value="0" data-balance ="0">--No Card Choosen --</option>
+                                    <?php
+                                     while ($row = $cards->fetch_assoc()) {
+                                         $balanceDisplay = number_format($row['balance'], 2);
+                                    ?>
+                                        <option 
+                                             value="<?php echo htmlspecialchars($row['cardNumber']); ?>" 
+                                             data-balance="<?php echo htmlspecialchars($row['balance']); ?>"> 
+                                            <?php echo htmlspecialchars($row['cardNumber']) . " (Balance: $" . $balanceDisplay . ")"; ?> 
+                                        </option>
+                                    <?php
+                                    }
+                                    ?>
+                            </select>
+            </div>
+            <div class="flex flex-col w-full gap-1">
+                <label for="">category:</label>
+                <select name="category" id="category" class="w-full p-2 bg-gray-200 rounded border border-gray-300">
+                 <option value="">nutrition</option>
+                 
+                
             <div class="flex flex-col w-full gap-1">
                 <label for="">Montant:</label>
                 <input type="text" name="montant" pattern ="[0-9]{1,}" placeholder="Enter the amount of Revenu" class=" p-2 bg-gray-200 rounded border border-gray-300" required>

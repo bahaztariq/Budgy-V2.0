@@ -98,6 +98,72 @@ if (dtx && typeof Donut !== 'undefined') {
         }
     });
 }
+const inputHolder = document.getElementById('input-holder');
+const inputNumber = document.getElementById('input-number');
+const inputExpiry = document.getElementById('input-expiry');
+const inputBank   = document.getElementById('input-bank');
+const inputType   = document.getElementById('input-type');
+
+const displayHolder = document.getElementById('display-holder');
+const displayNumber = document.getElementById('display-number');
+const displayExpiry = document.getElementById('display-expiry');
+const displayBank   = document.getElementById('display-bank');
+const displayType   = document.getElementById('display-type');
+
+const defaults = {
+    holder: 'JOHN DOE',
+    number: '0000 0000 0000 0000',
+    expiry: 'MM/YY'
+};
+
+if(inputHolder) {
+    inputHolder.addEventListener('input', (e) => {
+  displayHolder.innerText = e.target.value.toUpperCase() || defaults.holder;
+});
+}
+if(inputNumber) {
+
+inputNumber.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
+            e.target.value = formattedValue;
+            displayNumber.innerText = formattedValue || defaults.number;
+        });
+    }
+
+        if(inputExpiry) {
+inputExpiry.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2);
+            }
+            
+            e.target.value = value;
+            displayExpiry.innerText = value || defaults.expiry;
+        });
+
+
+        }
+
+        if(inputBank) {
+        inputBank.addEventListener('change', (e) => {
+            displayBank.innerText = e.target.value;
+        });
+        }
+        
+        if(displayBank) {
+        displayBank.innerText = inputBank.value;
+        }
+        
+        if(inputType) {
+        inputType.addEventListener('change', (e) => {
+            displayType.innerText = e.target.value;
+        });
+        }
+        
+         if(displayType) {
+        displayType.innerText = inputType.value;
+        }
 const cardNumber =document.getElementById('cardNumber')
 
 if(cardNumber){cardNumber.addEventListener('input', function(e) {

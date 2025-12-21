@@ -165,63 +165,112 @@ require('../Cards/show-cards.php');
     ?>
 </div>
     </main>
-    <div class="modal Add-card-form w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center z-50 p-4 hidden" >
-        <div class=" relative w-full md:w-3/4 flex justify-center items-center gap-4 md:gap-16 bg-white rounded-xl flex-col md:flex-row p-4">
-            <button class="close-Modal-btn absolute top-2 right-4 text-3xl cursor-pointer z-50">&times;</button>
-            <div class="w-full md:w-1/2 h-full card-container flex justify-center items-center ">
-               <div class="bg-black/20 rounded-2xl w-96 h-54">
-                <p>number</p>
-               </div>
+<div class="modal Add-card-form w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center z-50 p-4 hidden">
+    <div class="relative w-full md:w-3/4 flex justify-center items-center gap-4 md:gap-16 bg-white rounded-xl flex-col md:flex-row p-4">
+        <button class="close-Modal-btn absolute top-2 right-4 text-3xl cursor-pointer z-50">&times;</button>
+        
+        <div class="relative w-96 h-56 bg-[#70E000] rounded-2xl shadow-2xl overflow-hidden text-white font-mono transition-all duration-300 hover:scale-105"> 
+            <div class="relative w-full h-full p-6 flex flex-col justify-between z-10">
+                <div class="flex justify-between items-start">
+                    <div id="display-bank" class="bank-name text-sm font-bold tracking-widest uppercase text-black">
+                        CIH
+                    </div>
+                    <div id="display-type" class="card-type text-xl font-bold italic text-black">
+                        Visa
+                    </div>
+                </div>
+
+                <div class="w-12 h-9 bg-gradient-to-br from-yellow-200 to-yellow-500 rounded-md border border-yellow-600 shadow-inner flex items-center justify-center relative overflow-hidden">
+                    <div class="w-full h-[1px] bg-yellow-700 absolute top-1/3"></div>
+                    <div class="w-full h-[1px] bg-yellow-700 absolute bottom-1/3"></div>
+                    <div class="h-full w-[1px] bg-yellow-700 absolute left-1/3"></div>
+                    <div class="h-full w-[1px] bg-yellow-700 absolute right-1/3"></div>
+                </div>
+
+                <div class="mt-4">
+                    <h3 id="display-number" class="card-Number text-2xl font-bold tracking-widest drop-shadow-md text-black">
+                        0000 0000 0000 0000
+                    </h3>
+                </div>
+
+                <div class="flex justify-between items-end mt-2">
+                    <div class="flex flex-col space-y-1">
+                        <div class="flex items-center space-x-4">
+                            <div>
+                                <p class="text-[10px] text-gray-700 uppercase">Card Holder</p>
+                                <p id="display-holder" class="card-holder font-bold tracking-wide uppercase text-sm text-black">
+                                    JOHN DOE
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-gray-700 uppercase">Expires</p>
+                                <p id="display-expiry" class="card-expiry font-bold tracking-wide text-sm text-black">
+                                    MM/YY
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form action="../Cards/add-card.php" method="POST" class="relative w-full max-w-116 rounded-xl px-4 py-8 flex flex-col items-center gap-2 overflow-y-auto">
+            
+            <h2 class="font-bold text-3xl text-black">Add Card</h2>
+            
+            <div class="flex flex-col w-full gap-1">
+                <label for="input-type">Card Type:</label>
+                <select name="cardType" id="input-type" class="w-full p-2 bg-gray-200 rounded border border-gray-300">
+                    <option value="Visa">Visa</option>
+                    <option value="Master Card">Master Card</option>
+                    <option value="Union Pay">Union Pay</option>
+                </select>
             </div>
 
-            <form action="../Cards/add-card.php" method="POST" class=" relative w-full max-w-116   rounded-xl px-4 py-8 flex flex-col items-center gap-2 overflow-y-auto ">
-              
-                <h2 class="font-bold text-3xl text-black">Add Card</h2>
+            <div class="flex flex-col w-full gap-1">
+                <label for="input-bank">Bank:</label>
+                <select name="bankname" id="input-bank" class="w-full p-2 bg-gray-200 rounded border border-gray-300">
+                    <option value="Cih">Cih</option>
+                    <option value="BMCE">BMCE</option>
+                    <option value="Populaire">Populaire Bank</option>
+                    <option value="WafaCash">Wafacash</option>
+                    <option value="BankaLik">BankaLik</option>
+                    <option value="Western Union">Western Union</option>
+                </select>
+            </div>
+
+            <div class="flex flex-col w-full gap-1">
+                <label for="input-holder">Holder:</label>
+                <input type="text" name="cardHolder" id="input-holder" placeholder="John Doe" class="p-2 bg-gray-200 rounded border border-gray-300" required>
+            </div>
+
+            <div class="flex flex-col w-full gap-1">
+                <label for="input-balance">Balance:</label>
+                <input type="text" name="balance" id="input-balance" placeholder="1000.00" class="p-2 bg-gray-200 rounded border border-gray-300" required>
+            </div>
+
+            <div class="flex flex-col w-full gap-1">
+                <label for="input-number">Card Number:</label>
+                <input type="text" name="cardNumber" id="input-number" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" class="p-2 bg-gray-200 rounded border border-gray-300" required>
+            </div>
+
+            <div class="flex w-full gap-4">
                 <div class="flex flex-col w-full gap-1">
-                    <label for="">Card Type:</label>
-                    <select name="cardType" id="" class="w-full  p-2 bg-gray-200 rounded border border-gray-300">
-                        <option value="Visa">Visa</option>
-                        <option value="Master Card">Master Card</option>
-                        <option value="union">union</option>
-                    </select>
+                    <label for="input-expiry">Expiry Date:</label>
+                    <input type="text" name="expiryDate" id="input-expiry" maxlength="5" placeholder="MM/YY" class="p-2 bg-gray-200 rounded border border-gray-300" required>
                 </div>
                 <div class="flex flex-col w-full gap-1">
-                    <label for="">Bank:</label>
-                    <select name="bankname" id="" class="w-full  p-2 bg-gray-200 rounded border border-gray-300">
-                        <option value="Cih">Cih</option>
-                        <option value="BMCE">BMCE</option>
-                        <option value="Populaire">puplaire bank</option>
-                        <option value="wafaCash">wafacash</option>
-                        <option value="bankaLik">bankalik</option>
-                        <option value="western Union">western union</option>
-                    </select>
+                    <label for="input-cvv">CVV:</label>
+                    <input type="text" maxlength='3' name="cardCvv" id="input-cvv" placeholder="123" class="p-2 bg-gray-200 rounded border border-gray-300" required>
                 </div>
-                <div class="flex flex-col w-full gap-1">
-                  <label for="">Holder:</label>
-                  <input type="text" name="cardHolder" id="cardHolder"  placeholder="john doe" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
-                </div>
-                <div class="flex flex-col w-full gap-1">
-                  <label for="">Balance:</label>
-                  <input type="text" name="balance" id="cardHolder"  placeholder="john doe" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
-                </div>
-                <div class="flex flex-col w-full gap-1">
-                  <label for="">Card Number:</label>
-                  <input type="text" name="cardNumber" id="cardNumber" pattern ="[0-9\s]*" placeholder="XXXX XXXX XXXX XXXX" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
-                </div>
-                <div class="flex w-full gap-4">
-                 <div class="flex flex-col w-full gap-1">
-                   <label for="">expiry date:</label>
-                   <input type="text" name="expiryDate" pattern="[0-9]{2}/[0-9]{2}"  placeholder="01/01" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
-                 </div>
-                 <div class="flex flex-col w-full gap-1">
-                   <label for="">Cvv:</label>
-                   <input type="text"  maxlength='3' name="cardCvv" id="" placeholder="000" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
-                  </div>
-                </div>
-             <input type="submit" value="Add Card" class=" w-full bg-black text-white rounded-xl p-4">
-            </form>
-        </div>
+            </div>
+
+            <input type="submit" value="Add Card" class="w-full bg-black text-white rounded-xl p-4 mt-4 cursor-pointer hover:bg-gray-800">
+        </form>
     </div>
+</div>
+</body>
+</html>
    <script src="../js/script.js"></script>
 </body>
 </html>
