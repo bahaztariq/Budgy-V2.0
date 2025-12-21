@@ -222,3 +222,11 @@ function toggleStatus(id, checkbox) {
         container.classList.add('opacity-60', 'grayscale');
     }
 }
+const recipientCard =document.getElementById('recipientCard')
+
+if(recipientCard){recipientCard.addEventListener('input', function(e) {
+    let raw = e.target.value.replace(/\D/g, "").slice(0, 16);
+    e.target.value = raw.replace(/(.{4})/g, "$1 ").trim();
+});
+}
+

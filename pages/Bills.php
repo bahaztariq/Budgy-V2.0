@@ -115,13 +115,12 @@ if (!isset($_SESSION['user_id'])) {
 
                 <div class="flex flex-col w-full gap-1">
                   <label for="">receiptant:</label>
-                  <input type="text" name="balance" id="cardHolder"  placeholder="Enter recieption Email" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
+                  <input type="text" name="recipientEmail" id="recipientEmail" placeholder="Enter recieption Email" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
                 </div>
                 <div class="flex flex-col w-full gap-1">
                   <label for="">Reciept Card :</label>
-                  <select name="" id="" class="w-full p-2 bg-gray-200 rounded border border-gray-300">
-                    <option value="">choose receptant card</option>
-                  </select>
+                  <input type="text" name="recipientCard" id="recipientCard" placeholder="Enter recieption Card" class="w-full p-2 bg-gray-200 rounded border border-gray-300">
+                    
                 </div>
              <input type="submit" value="Send Money" class=" w-full bg-black text-white rounded-xl p-4">
             </form>
