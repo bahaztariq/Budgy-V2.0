@@ -74,6 +74,7 @@ if (!isset($_SESSION['user_id'])) {
                     <button class="Add-Bill-btn bg-black py-2 px-4 rounded-2xl text-white cursor-pointer">+ Add New bill</button>
                    </div>
                 </div>
+                <div></div>
     </main>
     <div class="modal Add-Transaction w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center z-50 p-4" >
             

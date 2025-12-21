@@ -45,8 +45,8 @@ closemodal.forEach((closemdl) => {
 window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('edit_id')) {
-        modifyRevenuModal.classList.remove('hidden');
-        modifyexpencesModal.classList.remove('hidden');
+        if(modifyRevenuModal) modifyRevenuModal.classList.remove('hidden');
+        if(modifyexpencesModal) modifyexpencesModal.classList.remove('hidden');
     }
 });
 
@@ -175,16 +175,26 @@ const cardSelect = document.getElementById('cardSelect');
 const amountInput = document.getElementById('amountInput');
 const balanceMsg = document.getElementById('balanceMsg');
 
-function updateMaxBalance() {
+if(cardSelect)cardSelect.addEventListener('change', function() {
     const selectedOption = cardSelect.options[cardSelect.selectedIndex];
     const balance = selectedOption.getAttribute('data-balance');
     amountInput.max = balance;
     balanceMsg.innerText = `Max transferable: $${balance}`;
+});
+
+const expenceCategory = document.getElementById('category');
+const expenceInput = document.getElementById('expenceInput');
+const limitmsg = document.getElementById('limitmsg');
+
+
+if(expenceCategory){
+    expenceCategory.addEventListener('change', function() {
+    const selectedOption = expenceCategory.options[expenceCategory.selectedIndex];
+    expenceInput.max = selectedOption.value;
+    limitmsg.innerText = `category limit: $${selectedOption.value}`;
+});
 }
-if(cardSelect.options.length > 0) {
-            updateMaxBalance();
-}
-cardSelect.addEventListener('change', updateMaxBalance);
+
 
 function toggleStatus(id, checkbox) {
     const isActive = checkbox.checked ? 1 : 0;

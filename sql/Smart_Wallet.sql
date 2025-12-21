@@ -50,6 +50,26 @@ CREATE TABLE cards (
     Foreign Key (UserID) REFERENCES users(UserID) on delete CASCADE
 );
 
+CREATE TABLE category_limits(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  category VARCHAR(30),
+  limit_amount DECIMAL(10,2)
+);
+
+
+INSERT INTO category_limits (category, limit_amount) VALUES
+                                         ('food', 1500.00),
+                                         ('shopping', 2000.00),
+                                         ('entertainment', 900.00),
+                                         ('utilities', 700.00),
+                                         ('transportation', 500.00),
+                                         ('healthcare', 1000.00),
+                                         ('education', 1200.00),
+                                         ('housing', 3000.00),
+                                         ('travel', 1500.00),
+                                         ('others', 800.00);
+
+alter table incomes add cardNumber VARCHAR(20) NOT NULL;
 TRUNCATE incomes;
 TRUNCATE users;
 

@@ -21,6 +21,8 @@ $stmt = $connect->prepare("SELECT * FROM cards WHERE Userid = ?");
 $stmt->bind_param("i", $userid); 
 $stmt->execute();
 $cards = $stmt->get_result();
+$sql = "select * from category_limits";
+$categorie = mysqli_query($connect, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +125,7 @@ $cards = $stmt->get_result();
                                     <a href='expences.php?edit_id={$row['id']}' class='text-blue-400 cursor-pointer'>
                                     <button class='btn-action btn-edit text-blue-400 cursor-pointer'><i class='fas fa-edit'></i></button>
                                   </a>
-                                   <a href='expences/Delete-expences.php/?id={$row['id']}' class='text-red-400 cursor-pointer' >
+                                   <a href='../expences/Delete-expences.php/?id={$row['id']}' class='text-red-400 cursor-pointer' >
                                     <button class='btn-action btn-delete text-red-400 cursor-pointer'><i class='fas fa-trash'></i></button>
                                   </a>   
                                   </div>
@@ -162,12 +164,28 @@ $cards = $stmt->get_result();
             <div class="flex flex-col w-full gap-1">
                 <label for="">category:</label>
                 <select name="category" id="category" class="w-full p-2 bg-gray-200 rounded border border-gray-300">
-                 <option value="">nutrition</option>
-                 
-                
+                 <option value="0" >--choose category --</option>
+                 <?php
+                 while($row = mysqli_fetch_assoc($categorie)){
+                 ?>
+                 <option value="<?php echo htmlspecialchars($row['limit_amount']); ?>">
+                    <?php echo htmlspecialchars($row['category']); ?>
+                </option>
+                 <?php
+                 }
+                 ?>
+                </select>   
             <div class="flex flex-col w-full gap-1">
                 <label for="">Montant:</label>
-                <input type="text" name="montant" pattern ="[0-9]{1,}" placeholder="Enter the amount of Revenu" class=" p-2 bg-gray-200 rounded border border-gray-300" required>
+                <input 
+                        type="number" 
+                        step="1.00" 
+                        name="montant" 
+                        id="expenceInput" 
+                        placeholder="0.00" 
+                        class="p-2 bg-gray-200 rounded border border-gray-300" 
+                required>
+                <span id="limitmsg" class="text-xs text-gray-500"></span>
             </div>
             <div class="flex flex-col w-full gap-1">
                 <label for="">Date:</label>
@@ -181,7 +199,7 @@ $cards = $stmt->get_result();
         </form>
     </div>
     <div class="modal Modify-expences-form w-full h-screen bg-black/30 fixed top-0 left-0 flex justify-center items-center <?php echo isset($_GET['edit_id']) ? '' : 'hidden'; ?>" >
-        <form action="expences/modify-expences.php" method="POST" class="relative w-full max-w-116 max-h-80 md:max-h-128 bg-white rounded-xl shadow-md px-4 py-8 flex flex-col items-center gap-4 overflow-y-auto">
+        <form action="../expences/modify-expences.php" method="POST" class="relative w-full max-w-116 max-h-80 md:max-h-128 bg-white rounded-xl shadow-md px-4 py-8 flex flex-col items-center gap-4 overflow-y-auto">
             <button type="button" onclick="window.location.href='expences.php'" class="close-Modal-btn absolute top-2 right-4 text-3xl cursor-pointer">&times;</button>
             <h2 class="font-bold text-3xl text-black">Modify Revenu</h2>
             
