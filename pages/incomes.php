@@ -51,7 +51,7 @@ $cards = $stmt->get_result();
                     <i class="w-5 h-5 ph ph-squares-four text-xl"></i>
                     <span class="font-medium">Overview</span>
                 </a>
-                <a href="incomes.php" class="flex items-center gap-3 px-4 py-3 bg-[#70E000] text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-[#70E000] text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
                     <i class="w-5 h-5 ph ph-chart-line-up text-xl"></i>
                     <span class="font-medium">Incomes</span>
                 </a>
@@ -67,13 +67,9 @@ $cards = $stmt->get_result();
                     <i class="w-5 h-5 fa-solid fa-receipt"></i>
                     <span class="font-medium"> Transactions</span>
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
-                    <i class="w-5 h-5 ph ph-gear text-xl"></i>
-                    <span class="font-medium">Settings</span>
-                </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
-                    <i class="w-5 h-5 fa-solid fa-download"></i>
-                    <span class="font-medium">download</span>
+                <a href="Reccuring.php" class="flex items-center gap-3 px-4 py-3 text-black-400 hover:text-white hover:bg-black-800 rounded-lg transition-colors">
+                    <i class="w-5 h-5 fa-regular fa-clock"></i>
+                    <span class="font-medium">Reccuring Trx</span>
                 </a>
                 <a href="logout.php" class="self-end flex items-center gap-3 px-4 py-3  rounded-lg text-white">
                      <i class="w-5 h-5 fa-solid fa-arrow-right-from-bracket"></i>
