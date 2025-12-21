@@ -90,13 +90,12 @@ $cards = $stmt->get_result();
                 </div>
                  <!-- incomes -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div class="px-6 py-4 border- border-gray-100 flex justify-between items-center">
+                    <div class="px-6 py-4 flex justify-between items-center bg-[#70E000]">
                         <h3 class="font-bold text-lg text-black-800">Revenu Transactions</h3>
-                        <button class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">View All</button>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm text-black-600">
-                            <thead class="bg-black-50 text-xs uppercase font-semibold text-black-500">
+                            <thead class="bg-black-50 text-xs uppercase font-semibold text-black-500 bg-[#70E000] ">
                                 <tr>
                                     <th class="px-6 py-4">Transaction ID</th>
                                     <th class="px-6 py-4">Amount</th>
@@ -109,7 +108,7 @@ $cards = $stmt->get_result();
                             <tbody class="divide-y divide-black-100">
                                 <?php
                                 while($row = mysqli_fetch_assoc($incomes)){
-                                  echo "<tr class='hover:bg-black-50 transition'>
+                                  echo "<tr class='hover:bg-black-50 transition  odd:bg-gray-300'>
                                    <td class='px-6 py-4 font-medium text-black-800'>#{$row['id']}</td>
                                    <td class='px-6 py-4'>
                                      <div class='flex items-center gap-3'>
