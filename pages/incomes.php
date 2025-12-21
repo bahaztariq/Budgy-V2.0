@@ -103,9 +103,10 @@ $cards = $stmt->get_result();
                             <thead class="bg-black-50 text-xs uppercase font-semibold text-black-500">
                                 <tr>
                                     <th class="px-6 py-4">Transaction ID</th>
+                                    <th class="px-6 py-4">Amount</th>
+                                    <th class="px-6 py-4">card Number</th>
                                     <th class="px-6 py-4">Description</th>
                                     <th class="px-6 py-4">Date</th>
-                                    <th class="px-6 py-4">Amount</th>
                                     <th class="px-6 py-4">Actions</th>
                                 </tr>
                             </thead>
@@ -116,11 +117,12 @@ $cards = $stmt->get_result();
                                    <td class='px-6 py-4 font-medium text-black-800'>#{$row['id']}</td>
                                    <td class='px-6 py-4'>
                                      <div class='flex items-center gap-3'>
-                                        <span>{$row['description']}</span>
+                                        <span>{$row['montant']}dh</span>
                                      </div>
                                    </td>
-                                   <td class='date class='px-6 py-4'>{$row['date_']}</td>
-                                   <td class='amount px-6 py-4 font-medium text-black-800'><span>{$row['montant']}</span> DH</td>
+                                   <td class='amount px-6 py-4 font-medium text-black-800'><span>{$row['cardNumber']}</span></td>
+                                   <td class='px-6 py-4'>{$row['description']}</td>
+                                    <td class='px-6 py-4'><span>{$row['date_']}</span></td>
                                    <td class='px-6 py-4'>
                                    <div class='flex gap-4' >
                                     <a href='incomes.php?edit_id={$row['id']}' class='text-blue-400 cursor-pointer'>

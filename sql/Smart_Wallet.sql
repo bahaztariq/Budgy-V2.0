@@ -9,6 +9,7 @@ CREATE TABLE incomes(
     description varchar(1000) NOT NULL,
     date_ DATE DEFAULT (CURRENT_TIME),
     dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
+    cardNumber VARCHAR(20) NOT NULL
 );
 CREATE TABLE expences(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -17,7 +18,8 @@ CREATE TABLE expences(
     description varchar(1000) NOT NULL,
     date_ DATE DEFAULT (CURRENT_TIME),
     dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
-    
+    cardNumber VARCHAR(20) NOT NULL
+    category VARCHAR(30) NOT NULL
 );
 CREATE TABLE users(
     UserID INT PRIMARY key AUTO_INCREMENT,
@@ -69,8 +71,8 @@ INSERT INTO category_limits (category, limit_amount) VALUES
                                          ('travel', 1500.00),
                                          ('others', 800.00);
 
-alter table incomes add cardNumber VARCHAR(20) NOT NULL;
-TRUNCATE incomes;
+
+TRUNCATE expences;
 TRUNCATE users;
 
 

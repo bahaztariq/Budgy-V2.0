@@ -102,9 +102,11 @@ $categorie = mysqli_query($connect, $sql);
                             <thead class="bg-black-50 text-xs uppercase font-semibold text-black-500">
                                 <tr>
                                     <th class="px-6 py-4">Transaction ID</th>
+                                    <th class="px-6 py-4">Amount</th>
+                                    <th class="px-6 py-4">category</th>
+                                    <th class="px-6 py-4">card Number</th>
                                     <th class="px-6 py-4">Description</th>
                                     <th class="px-6 py-4">Date</th>
-                                    <th class="px-6 py-4">Amount</th>
                                     <th class="px-6 py-4">Actions</th>
                                 </tr>
                             </thead>
@@ -115,11 +117,15 @@ $categorie = mysqli_query($connect, $sql);
                                    <td class='px-6 py-4 font-medium text-black-800'>#{$row['id']}</td>
                                    <td class='px-6 py-4'>
                                      <div class='flex items-center gap-3'>
-                                        <span>{$row['description']}</span>
+                                     <span>{$row['montant']}</span>DH
+                                        
                                      </div>
                                    </td>
-                                   <td class='date class='px-6 py-4'>{$row['date_']}</td>
-                                   <td class='amount px-6 py-4 font-medium text-black-800'><span>{$row['montant']}</span> DH</td>
+                                   
+                                   <td class='amount px-6 py-4 font-medium text-black-800'><span>{$row['category']}</span></td>
+                                   <td class='px-6 py-4'><span>{$row['cardNumber']}</span></td>
+                                    <td class='px-6 py-4'><span>{$row['description']}</span></td>
+                                    <td class='px-6 py-4'><span>{$row['date_']}</span></td>
                                    <td class='px-6 py-4'>
                                    <div class='flex gap-4' >
                                     <a href='expences.php?edit_id={$row['id']}' class='text-blue-400 cursor-pointer'>
@@ -168,7 +174,7 @@ $categorie = mysqli_query($connect, $sql);
                  <?php
                  while($row = mysqli_fetch_assoc($categorie)){
                  ?>
-                 <option value="<?php echo htmlspecialchars($row['limit_amount']); ?>">
+                 <option value="<?php echo htmlspecialchars($row['category']); ?>" data-limit="<?php echo htmlspecialchars($row['limit_amount']); ?>" >
                     <?php echo htmlspecialchars($row['category']); ?>
                 </option>
                  <?php

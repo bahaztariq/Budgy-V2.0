@@ -190,8 +190,8 @@ const limitmsg = document.getElementById('limitmsg');
 if(expenceCategory){
     expenceCategory.addEventListener('change', function() {
     const selectedOption = expenceCategory.options[expenceCategory.selectedIndex];
-    expenceInput.max = selectedOption.value;
-    limitmsg.innerText = `category limit: $${selectedOption.value}`;
+    expenceInput.max = selectedOption.getAttribute('data-limit');
+    limitmsg.innerText = `category limit: $${selectedOption.getAttribute('data-limit')}`;
 });
 }
 
