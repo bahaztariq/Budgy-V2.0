@@ -10,6 +10,7 @@ CREATE TABLE incomes(
     date_ DATE DEFAULT (CURRENT_TIME),
     dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
     cardNumber VARCHAR(20) NOT NULL
+    Foreign Key (UserId) REFERENCES users(UserID) on delete CASCADE
 );
 CREATE TABLE expences(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -20,6 +21,7 @@ CREATE TABLE expences(
     dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
     cardNumber VARCHAR(20) NOT NULL
     category VARCHAR(30) NOT NULL
+    Foreign Key (UserId) REFERENCES users(UserID) on delete CASCADE
 );
 CREATE TABLE users(
     UserID INT PRIMARY key AUTO_INCREMENT,
@@ -83,5 +85,17 @@ CREATE Table transactions(
     montant DECIMAL(10,2) NOT NULL,
     recipientcard VARCHAR(20) NOT NULL,
     dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
+    Foreign Key (UserId) REFERENCES users(UserID) on delete CASCADE
 )
-    
+
+
+CREATE TABLE Recurring_transactions(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  UserID INT NOT NULL,
+  cardNumber VARCHAR(20) NOT NULL,
+  montant DECIMAL(10,2) NOT NULL,
+  category VARCHAR(30),
+  repititon ENUM ('daily', 'weekly', 'monthly'),
+  dateIn DATETIME DEFAULT CURRENT_TIMESTAMP
+  Foreign Key (UserId) REFERENCES users(UserID) on delete CASCADE
+);

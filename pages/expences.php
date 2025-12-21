@@ -176,7 +176,8 @@ $categorie = mysqli_query($connect, $sql);
                  <?php
                  }
                  ?>
-                </select>   
+                </select>  
+            </div>
             <div class="flex flex-col w-full gap-1">
                 <label for="">Montant:</label>
                 <input 
