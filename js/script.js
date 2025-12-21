@@ -98,13 +98,13 @@ if (dtx && typeof Donut !== 'undefined') {
         }
     });
 }
+const cardNumber =document.getElementById('cardNumber')
 
-
-document.getElementById('cardNumber').addEventListener('input', function(e) {
+if(cardNumber){cardNumber.addEventListener('input', function(e) {
     let raw = e.target.value.replace(/\D/g, "").slice(0, 16);
     e.target.value = raw.replace(/(.{4})/g, "$1 ").trim();
 });
-
+}
 const cardSelect = document.getElementById('cardSelect');
 const amountInput = document.getElementById('amountInput');
 const balanceMsg = document.getElementById('balanceMsg');
