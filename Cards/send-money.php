@@ -27,7 +27,7 @@ $sql3 ="UPDATE cards SET balance = balance - $amount WHERE cardNumber = '$cardNu
 $add = mysqli_query($connect, $sql2);
 $minus  = mysqli_query($connect, $sql3);
 
-$sql4 ="INSERT INTO transactions(UserID,montant, cardNumber, recipientCard) VALUES ('$userid', '$amount, '$cardNumber', '$recipientCard')";
+$sql4 ="INSERT INTO transactions(UserID,montant, cardNumber, recipientcard) VALUES ('$userid', '$amount, '$cardNumber', '$recipientCard')";
 $trx = mysqli_query($connect, $sql4);
 
 
