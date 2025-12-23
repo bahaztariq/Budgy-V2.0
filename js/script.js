@@ -10,6 +10,15 @@ const modifyRevenuModal = document.querySelector('.Modify-revenu-form');
 const modifyexpencesModal = document.querySelector('.Modify-expences-form');
 const addTransactionBtn = document.querySelector('.Add-Transaction-btn');
 const addTransactionForm = document.querySelector('.Add-Transaction-form');
+const opensidebar = document.getElementById('open-sidebar');
+const sidebar = document.getElementById('aside-modal');
+
+
+if(opensidebar){
+    opensidebar.addEventListener('click',()=>{
+        sidebar.classList.toggle('hidden');
+    })
+}
 
 
 modals.forEach((mdl) => {

@@ -30,11 +30,12 @@ $userid = $_SESSION['user_id'];
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="bg-black-50 text-black-800" x-data="{ sidebarOpen: false }">
+<body class="bg-black-50 text-black-800">
 
     <div class="flex h-screen overflow-hidden">
 
-        <aside class="h-screen flex flex-col absolute z-40 left-0 top-0 bottom-0 w-64 bg-black text-white transition-transform duration-300 ease-in-out md:relative md:tranblack-x-0 hidden lg:block">
+        <div id="aside-modal" class="modal aside-modal h-full w-full bg-black/30 hidden md:w-fit">
+        <aside id="sidebar" class="sidebar h-screen fixed md:flex flex-col absolute z-40 left-0 top-0 bottom-0 w-64 bg-black text-white transition-transform duration-300 ease-in-out md:relative md:tranblack-x-0  lg:block ">
             
             <div class="h-16 flex items-center px-4  border-black-700">
                 <img src="../imgs/icon.png" alt="" class="w-12 h-12">
@@ -72,13 +73,13 @@ $userid = $_SESSION['user_id'];
                 </a>
             </nav>
         </aside>
-
-        <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 bg-black/50 z-30 md:hidden"></div>
+        </div>
+        
 
         <div class="flex-1 flex flex-col h-screen overflow-hidden relative">
 
             <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-20">
-                <button @click="sidebarOpen = !sidebarOpen" class="md:hidden text-black-600 focus:outline-none">
+                <button id="open-sidebar" class="md:hidden text-black-600 focus:outline-none">
                     <i class="w-5 h-5 ph ph-list text-2xl"></i>
                 </button>
 
